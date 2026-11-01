@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>NecroResult — Necromunda battle report</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="./css/style.css">
+  <script type="module" src="./js/app.js"></script>
+</head>
+<body>
+  <header>
+    <h1>NecroResult — Necromunda battle report</h1>
+    <form id="campaign-form" class="campaign-form">
+      <label for="campaign-input">Munda Manager campaign link</label>
+      <div class="row">
+        <input id="campaign-input" type="text" autocomplete="off" spellcheck="false">
+        <button id="load-button" type="submit">Load</button>
+      </div>
+    </form>
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+  </header>
+
+  <main>
+    <section id="gangs-section">
+      <h2>Gangs &amp; Players</h2>
+      <p class="hint">Pick the 1 or 2 gangs that fought.</p>
+      <div id="gang-list" class="gang-list"></div>
+    </section>
+
+    <section id="rosters-section">
+      <h2>Rosters</h2>
+      <p class="hint">Munda Manager's public API has no fighter data, so enter each gang's roster here once — it is kept in this browser.</p>
+      <p class="hint">Format: one fighter per line, <code>Name: weapon1, weapon2</code>. Lines starting with <code>#</code> are ignored.</p>
+      <div id="roster-list"></div>
+      <div class="row tools">
+        <button id="export-rosters" type="button">Export rosters</button>
+        <label class="file-button">Import rosters
+          <input id="import-rosters" type="file" accept=".json,application/json">
+        </label>
+      </div>
+      <p id="roster-status" class="status" role="status" aria-live="polite"></p>
+    </section>
+
+    <section id="casualties-section">
+      <h2>Casualties</h2>
+      <div class="table-wrap">
+        <table class="rows">
+          <thead>
+            <tr><th>WHO</th><th>WITH WHAT</th><th>WHO (victim)</th><th>RESULT</th><th>XP</th><th><span class="sr-only">Remove</span></th></tr>
+          </thead>
+          <tbody id="casualty-rows"></tbody>
+        </table>
+      </div>
+      <button id="add-casualty" type="button">Add casualty</button>
+    </section>
+
+    <section id="actions-section">
+      <h2>Special actions</h2>
+      <div class="table-wrap">
+        <table class="rows">
+          <thead>
+            <tr><th>WHO</th><th>WHAT HAPPENED</th><th>XP</th><th><span class="sr-only">Remove</span></th></tr>
+          </thead>
+          <tbody id="action-rows"></tbody>
+        </table>
+      </div>
+      <button id="add-action" type="button">Add action</button>
+    </section>
+
+    <section id="report-section">
+      <h2>Report</h2>
+      <button id="generate-report" type="button" class="primary">Generate report</button>
+      <ul id="report-errors" class="errors" hidden></ul>
+      <div id="report-output" hidden>
+        <h3>JSON</h3>
+        <textarea id="report-json" readonly rows="16" spellcheck="false"></textarea>
+        <h3>Text summary</h3>
+        <textarea id="report-text" readonly rows="10" spellcheck="false"></textarea>
+        <div class="row tools">
+          <button id="copy-json" type="button">Copy JSON</button>
+          <button id="copy-text" type="button">Copy text</button>
+          <button id="download-json" type="button">Download JSON</button>
+        </div>
+        <p id="report-status" class="status" role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    Campaign data from <a href="https://www.mundamanager.com" target="_blank" rel="noopener">Munda Manager</a> public API. Not affiliated.
+  </footer>
+</body>
+</html>
